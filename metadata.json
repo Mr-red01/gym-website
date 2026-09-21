@@ -1,0 +1,6 @@
+{
+  "name": "Mafia: The Game",
+  "description": "Official landing page and hero section for Mafia: The Game.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
