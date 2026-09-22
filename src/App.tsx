@@ -11,6 +11,7 @@ import { GymAboutSection } from './components/GymAboutSection';
 import { GymTestimonialsSection } from './components/GymTestimonialsSection';
 import { Footer } from './components/Footer';
 import { WhatsAppButton } from './components/WhatsAppButton';
+import { CoachesPage } from './components/CoachesPage';
 import { TrailerModal } from './components/TrailerModal';
 import { PreOrderModal } from './components/PreOrderModal';
 import { CartDrawer } from './components/CartDrawer';
@@ -33,7 +34,9 @@ export default function App() {
 
   const handleTabSelect = (tab: ActiveTab) => {
     setActiveTab(tab);
-    if (tab === 'fitness' || tab === 'coaches') {
+    if (tab === 'coaches') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (tab === 'fitness') {
       document.getElementById('fitness')?.scrollIntoView({ behavior: 'smooth' });
     } else if (tab === 'location') {
       document.getElementById('location')?.scrollIntoView({ behavior: 'smooth' });
@@ -85,6 +88,29 @@ export default function App() {
       return next;
     });
   };
+
+  if (activeTab === 'coaches') {
+    return (
+      <>
+        <CoachesPage
+          onBack={() => {
+            setActiveTab('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          onBookSession={() => setIsPreOrderOpen(true)}
+        />
+        <WhatsAppButton
+          phoneNumber="919743439097"
+          message="Hi, I’m interested in booking a session with a coach."
+        />
+        <PreOrderModal
+          isOpen={isPreOrderOpen}
+          onClose={() => setIsPreOrderOpen(false)}
+          onAddToCart={handleAddToCart}
+        />
+      </>
+    );
+  }
 
   return (
     <div className="relative min-h-screen w-full bg-paper-texture paper-grain flex flex-col justify-between overflow-x-hidden font-heading text-[#111111] antialiased select-none">
